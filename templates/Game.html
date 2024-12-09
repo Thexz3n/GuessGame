@@ -109,13 +109,20 @@
             font-weight: bold;
             margin-top: 20px;
         }
+
+        /* White background for spaces */
+        .space {
+            background-color: white;
+            display: inline-block;
+            width: 10px; /* Space width */
+        }
     </style>
 </head>
 <body>
     <div class="game-container">
         <div class="game-header">Word Guess Game</div>
         <p class="instructions">Guess the word one letter at a time. You have <span id="livesCount">5</span> lives!</p>
-        <div class="word-display" id="wordDisplay">_ _ _ _ _ _ _ _</div>
+        <div class="word-display" id="wordDisplay">_ _ _   _ _ _ _  !</div> <!-- Initially shows the word with space and symbol -->
         <p class="lives">Lives Left: <span id="lives">5</span></p>
         <div class="guess-input">
             <input type="text" id="guessInput" maxlength="1" placeholder="Enter a letter">
@@ -126,12 +133,19 @@
     </div>
 
     <script>
-        const wordToGuess = "ELEPHANT"; // Word to guess (can be dynamic)
-        let guessedWord = Array(wordToGuess.length).fill("_"); // Array for tracking correct guesses
+        const wordToGuess = "pop star"; // The word with spaces and symbols
+        let guessedWord = Array.from(wordToGuess).map(char => {
+            // Create the display with underscores for letters and the actual character for spaces or symbols
+            return char === " " || /[!@#$%^&*?]/.test(char) ? char : "_";
+        });
         let lives = 5; // Number of lives the user has
 
         function updateDisplay() {
-            document.getElementById("wordDisplay").textContent = guessedWord.join(" ");
+            const wordDisplay = document.getElementById("wordDisplay");
+            wordDisplay.innerHTML = guessedWord.map(char => {
+                // If the character is a space, make it white
+                return char === " " ? '<span class="space"> </span>' : char;
+            }).join(" ");
             document.getElementById("lives").textContent = lives;
         }
 
@@ -140,20 +154,25 @@
             const resultMessage = document.getElementById("resultMessage");
             document.getElementById("guessInput").value = ""; // Clear input field
 
-            // Validate input
-            if (!guess || guess.length !== 1) {
-                resultMessage.textContent = "Please enter a single letter.";
+            // Validate input (only letters)
+            if (!guess || guess.length !== 1 || !/[A-Z]/.test(guess)) {
+                resultMessage.textContent = "Please enter a valid single letter.";
                 return;
             }
 
-            if (wordToGuess.includes(guess)) {
-                // Correct guess
-                resultMessage.textContent = `Good job! "${guess}" is correct.`;
-                for (let i = 0; i < wordToGuess.length; i++) {
-                    if (wordToGuess[i] === guess) guessedWord[i] = guess;
+            let correctGuess = false;
+
+            // Check each letter in the word
+            for (let i = 0; i < wordToGuess.length; i++) {
+                if (wordToGuess[i].toUpperCase() === guess) {
+                    guessedWord[i] = wordToGuess[i]; // Reveal the guessed letter
+                    correctGuess = true;
                 }
+            }
+
+            if (correctGuess) {
+                resultMessage.textContent = `Good job! "${guess}" is correct.`;
             } else {
-                // Incorrect guess
                 resultMessage.textContent = `Oops! "${guess}" is not in the word.`;
                 lives--;
             }
