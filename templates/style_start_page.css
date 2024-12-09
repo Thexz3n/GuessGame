@@ -1,0 +1,141 @@
+*{
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    list-style: none;
+}
+
+
+:root {
+    --accent-color: #8672FF;
+    --base-color: white;
+    --text-color: #2E2B41;
+    --input-color: #F3F0FF;
+}
+
+
+/* style_start_page.css */
+
+body {
+    font-family: Arial, sans-serif;
+    background: var(--base-color);
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background: #fff;
+    border-radius: 10px;
+    color: var(--text-color);
+    padding: 30px 40px;
+    text-align: center;
+    width: 350px;
+}
+
+h1 {
+    font-size: 30px;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+
+form label {
+    display: block;
+    font-weight: bold;
+    color: #555;
+    margin: 15px 0 5px;
+}
+
+form select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+}
+
+select{
+    box-sizing: border-box;
+    flex-grow: 1;
+    min-width: 0;
+    height: 50px;
+    padding: 1em;
+    font: inherit;
+    border-radius: 0 10px 10px 0;
+    border: 2px solid var(--input-color-color);
+    border-left: none;
+    background-color: var(--input-color);
+    transition: 150ms ease;
+    color: var(--text-color);
+    cursor: pointer;
+}
+
+select:hover {
+    border-color: var(--accent-color);
+}
+
+select:focus {
+    outline: none;
+    border-color: var(--text-color);
+}
+
+
+form option{
+    font-size: 14px;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: 150ms ease;
+    color: var(--text-color);
+}
+
+form option:checked {
+    background-color: var(--accent-color);
+    color: var(--base-color);
+}
+
+
+form option:hover {
+    border-color: var(--accent-color);
+}
+
+form option:focus {
+    outline: none;
+    border-color: var(--text-color);
+}
+
+
+form button {
+    margin-top: 10px;
+    border: none;
+    border-radius: 1000px;
+    padding: .85em 1em;
+    background-color: var(--accent-color);
+    color: var(--base-color);
+    font: inherit;
+    font-weight: 600;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: 150ms ease;
+}
+
+
+
+form button:hover {
+    background-color: var(--text-color);
+}
+
+form button:focus {
+    outline: none;
+    background-color: var(--text-color);
+}
+
+
+label{
+    font-size: 15px;
+    color: var(--text-color);
+}

@@ -1,0 +1,38 @@
+
+<!-- /*Create a start page for word guess game,and by user chosie catagory games, for example the user choise word movie,sport, leader contery,and detected the diffecult game*/ -->
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style_start_page.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Welcome to Word Guess Game</h1>
+        <form action="game.php" method="get">
+            <label for="catagory" > <h4 class="title-label"> Choose Catagory: </h4></label>
+            <select id="catagory" name="catagory">
+                <option value="Animal">Animal</option>
+                <option value="sport">Sports</option>
+                <option value="Fruit">Fruit</option>
+                <option value="Contries">Contries</option>
+            </select>
+            <br>
+            <br>
+            <label for="Difficulty">Choose Difficulty: </label>
+            <select id="catagory" name="catagory">
+                <option value="Easy">Easy</option>
+                <option value="Medium">Medium</option>
+                <option value="Hard">Hard</option>
+            </select>
+            <br><br>
+            <button type="submit">Start Game</button>
+        </form>
+
+    </div>
+</body>
+</html>
