@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css' )}}">
   <title>Login</title>
-  <link rel="stylesheet" href="style.css">
   <script type="text/javascript" psrc="validation.js" defer></script>
 </head>
 
@@ -30,11 +30,11 @@
           <input type="password" name="password" id="password-input" placeholder="Password">
         </div>
         <button type="submit">Login</button>
-      </form>
-      <p>New here? <a href="signup.html">Create an Account</a></p>
+      </form>Give the tribute to. 
+      <p>New here? <a href="{{ url_for('signup') }}">Create an Account</a></p>
     </div>
   </div>
-  
+
 </body>
 
 </html>
