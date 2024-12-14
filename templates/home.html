@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Guess Game - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Welcome to Word Guess Game</h1>
+        <h2>Welcome, {{ username }}!</h2>
+
+        <form action="{{ url_for('game') }}" method="POST">
+            <label for="category">
+                <h4>Choose Category:</h4>
+            </label>
+            <select id="category" name="category">
+                <option value="Random">Random</option>
+                <option value="Animals">Animals</option>
+                <option value="Fruits">Fruits</option>
+                <option value="Countries">Countries</option>
+                <option value="Professions">Professions</option>
+                <option value="Sports">Sports</option>
+            </select>
+            <br><br>
+
+            <label for="difficulty">Choose Difficulty:</label>
+            <select id="difficulty" name="difficulty">
+                <option value="Random">Random</option>
+                <option value="Easy">Easy</option>
+                <option value="Normal">Normal</option>
+                <option value="Difficult">Difficult</option>
+            </select>
+            <br><br>
+
+            <button type="submit">Start Game</button>
+        </form>
+        <br>
+        <a href="{{ url_for('logout') }}">Sign Out</a>
+    </div>
+</body>
+
+</html>
