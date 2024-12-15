@@ -214,5 +214,5 @@ def next_word():
 
 # Run the Flask app
 if __name__ == '__main__':
-    app.run(host='192.168.60.43', port=5000, debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True) # change 0.0.0.0 to your local ip address
 
