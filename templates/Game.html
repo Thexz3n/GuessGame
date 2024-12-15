@@ -26,15 +26,17 @@
 
     <script>
         let words = {{ words | tojson }};
-        let currentWordIndex = 0;
-        let wordToGuess = words[currentWordIndex].word.toUpperCase();
-        let wordDifficulty = words[currentWordIndex].difficulty; // Difficulty of the word
+        let wordQueue = [...words]; // Initialize the queue with words
+        let currentWord = wordQueue.shift(); // Dequeue the first word
+        let wordToGuess = currentWord.word.toUpperCase();
+        let wordDifficulty = currentWord.difficulty; // Difficulty of the word
         let guessedWord = Array.from(wordToGuess).map(char => /[A-Z]/.test(char) ? "_" : char);
         let lives = 5;
         let wrongLetters = [];
         let totalScore = 0;
         let scoreArray = [];
         let guessedWords = [];
+        let guessedLetters = new Set(); // Set for unique guesses
 
         function updateDisplay() {
             const wordDisplay = document.getElementById("wordDisplay");
@@ -63,10 +65,12 @@
                 return;
             }
 
-            if (wrongLetters.includes(guess) || guessedWord.includes(guess)) {
+            if (guessedLetters.has(guess)) {
                 document.getElementById("resultMessage").textContent = `You already guessed "${guess}".`;
                 return;
             }
+
+            guessedLetters.add(guess); // Add the guess to the set
 
             let correctGuess = false;
 
@@ -96,22 +100,18 @@
                 console.log("this is for debugging");
                 document.getElementById("resultMessage").textContent = `Congratulations! You guessed the word: "${wordToGuess}"`;
                 document.getElementById("submitBtn").textContent = "Next";
-                document.getElementById("submitBtn").addEventListener("keyup", function (event) {
-                    if (event.key === "Enter") {
-                        nextWord;
-                    }
-                });
                 document.getElementById("submitBtn").onclick = nextWord;
             }
         }
 
         function nextWord() {
-            currentWordIndex++;
-            if (currentWordIndex < words.length) {
-                wordToGuess = words[currentWordIndex].word.toUpperCase();
-                wordDifficulty = words[currentWordIndex].difficulty;
+            if (wordQueue.length > 0) {
+                currentWord = wordQueue.shift(); // Dequeue the next word
+                wordToGuess = currentWord.word.toUpperCase();
+                wordDifficulty = currentWord.difficulty;
                 guessedWord = Array.from(wordToGuess).map(char => /[A-Z]/.test(char) ? "_" : char);
                 wrongLetters = [];
+                guessedLetters.clear(); // Clear the set for the next word
                 lives = 5; // Reset lives to 5
                 document.getElementById("resultMessage").textContent = "";
                 document.getElementById("submitBtn").textContent = "Submit";
