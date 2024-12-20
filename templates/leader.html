@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Guess Game Leaderboard</title>
     <style>
-        /* Reset styles */
+        /* Reset */
         * {
             margin: 0;
             padding: 0;
@@ -13,42 +13,35 @@
         }
 
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient;
-            background-size: 400% 400%;
-            animation: gradientBG 10s ease infinite;
-            color: #333;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(90deg,white,#c9d6ff);
+            color: #333333;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
-            overflow: hidden;
-        }
-
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            padding: 20px;
         }
 
         .leaderboard-container {
-            width: 90%;
+            width: 100%;
             max-width: 800px;
-            background: rgba(255, 255, 255, 0.9);
+            background: #ffffff;
+            border: 2px solid #7494ec;
             border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
             overflow: hidden;
         }
 
         .leaderboard-header {
-            background: linear-gradient(90deg, rgb(255, 215, 215), rgb(255, 231, 171));
-            color: #333;
-            padding: 20px;
+            background-color: #7494ec;
+            color: #ffffff;
             text-align: center;
-            font-size: 26px;
+            padding: 20px;
+            font-size: 24px;
             font-weight: bold;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
 
         table {
@@ -57,40 +50,52 @@
         }
 
         thead {
-            background-color: rgb(240, 240, 240);
+            background-color: #f2f5fc;
         }
 
         th, td {
             padding: 15px;
             text-align: center;
             font-size: 16px;
+            border-bottom: 1px solid #e6e6e6;
         }
 
         th {
             font-weight: bold;
-            color: rgb(85, 145, 200);
+            color: #7494ec;
+            text-transform: uppercase;
         }
 
         tbody tr:nth-child(even) {
-            background-color: rgba(255, 243, 231, 0.5);
+            background-color: #f9f9f9;
         }
 
         tbody tr:hover {
-            background-color: rgba(255, 220, 220, 0.3);
+            background-color: #eaf2ff;
             cursor: pointer;
         }
 
         .highlight {
-            background: linear-gradient(90deg, rgba(255, 240, 210, 0.8), rgba(240, 230, 255, 0.8));
-            color: #333;
+            background: #eaf2ff;
+            color: #333333;
             font-weight: bold;
         }
 
         footer {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 15px;
             font-size: 14px;
-            color: #555;
+            color: #666666;
+        }
+
+        footer a {
+            color: #7494ec;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        footer a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
@@ -141,7 +146,7 @@
         </table>
     </div>
     <footer>
-       
+      
     </footer>
 </body>
 </html>

@@ -14,7 +14,7 @@
 
         body {
             font-family: 'Arial', sans-serif;
-            background-color: white; /* Set background to white */
+            background: linear-gradient(90deg, white, #c9d6ff); /* Updated gradient background */
             color: #333;
             display: flex;
             justify-content: center;
@@ -26,7 +26,8 @@
         .game-container {
             background: rgba(255, 255, 255, 0.9);
             border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+            border: 2px solid#7494ec; /* White border */
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2); /* Subtle shadow */
             width: 90%;
             max-width: 600px;
             text-align: center;
@@ -34,9 +35,8 @@
         }
 
         .game-header {
-         
-            color: #333;
-            font-size: 26px;
+            color: #7494ec; /* Purple header text */
+            font-size: 28px;
             font-weight: bold;
             text-transform: uppercase;
             letter-spacing: 2px;
@@ -55,13 +55,13 @@
             font-weight: bold;
             letter-spacing: 10px;
             margin: 20px 0;
-            color: rgb(85, 145, 200);
+            color: #7494ec; /* Purple word display */
         }
 
         .lives {
             font-size: 18px;
             margin-bottom: 20px;
-            color: rgb(255, 99, 71);
+            color: #f44336; /* Red for lives */
         }
 
         .guess-input {
@@ -72,7 +72,7 @@
             width: 50%;
             padding: 10px;
             font-size: 16px;
-            border: 2px solid rgb(200, 200, 255);
+            border: 2px solid #7494ec; /* Purple border */
             border-radius: 8px;
             outline: none;
             margin-bottom: 20px;
@@ -82,14 +82,14 @@
         }
 
         input[type="text"]:focus {
-            border: 2px solid rgb(85, 145, 200);
+            border: 2px solid #4e68d7; /* Darker purple on focus */
         }
 
         .btn {
             padding: 10px 20px;
             font-size: 16px;
             color: white;
-            background:linear-gradient(90deg, rgb(255, 231, 171), rgb(255, 231, 171));
+            background: linear-gradient(90deg, #7494ec, #4e68d7); /* Purple gradient */
             border: none;
             border-radius: 8px;
             cursor: pointer;
@@ -105,13 +105,13 @@
             font-size: 18px;
             font-weight: bold;
             margin-top: 20px;
+            color: #333;
         }
 
-        /* White background for spaces */
         .space {
             background-color: white;
             display: inline-block;
-            width: 10px; /* Space width */
+            width: 10px;
         }
 
         footer {
@@ -126,7 +126,7 @@
     <div class="game-container">
         <div class="game-header">Word Guess Game</div>
         <p class="instructions">Guess the word one letter at a time. You have <span id="livesCount">5</span> lives!</p>
-        <div class="word-display" id="wordDisplay">_ _ _   _ _ _ _  !</div> <!-- Initially shows the word with space and symbol -->
+        <div class="word-display" id="wordDisplay">_ _ _   _ _ _ _  !</div>
         <p class="lives">Lives Left: <span id="lives">5</span></p>
         <div class="guess-input">
             <input type="text" id="guessInput" maxlength="1" placeholder="Enter a letter">
@@ -137,17 +137,15 @@
     </div>
 
     <script>
-        const wordToGuess = "pop star"; // The word with spaces and symbols
+        const wordToGuess = "pop star";
         let guessedWord = Array.from(wordToGuess).map(char => {
-            // Create the display with underscores for letters and the actual character for spaces or symbols
             return char === " " || /[!@#$%^&*?]/.test(char) ? char : "_";
         });
-        let lives = 5; // Number of lives the user has
+        let lives = 5;
 
         function updateDisplay() {
             const wordDisplay = document.getElementById("wordDisplay");
             wordDisplay.innerHTML = guessedWord.map(char => {
-                // If the character is a space, make it white
                 return char === " " ? '<span class="space"> </span>' : char;
             }).join(" ");
             document.getElementById("lives").textContent = lives;
@@ -156,9 +154,8 @@
         function makeGuess() {
             const guess = document.getElementById("guessInput").value.toUpperCase();
             const resultMessage = document.getElementById("resultMessage");
-            document.getElementById("guessInput").value = ""; // Clear input field
+            document.getElementById("guessInput").value = "";
 
-            // Validate input (only letters)
             if (!guess || guess.length !== 1 || !/[A-Z]/.test(guess)) {
                 resultMessage.textContent = "Please enter a valid single letter.";
                 return;
@@ -166,10 +163,9 @@
 
             let correctGuess = false;
 
-            // Check each letter in the word
             for (let i = 0; i < wordToGuess.length; i++) {
                 if (wordToGuess[i].toUpperCase() === guess) {
-                    guessedWord[i] = wordToGuess[i]; // Reveal the guessed letter
+                    guessedWord[i] = wordToGuess[i];
                     correctGuess = true;
                 }
             }
@@ -181,10 +177,8 @@
                 lives--;
             }
 
-            // Update display
             updateDisplay();
 
-            // Check game over conditions
             if (lives <= 0) {
                 resultMessage.textContent = `Game over! The word was "${wordToGuess}".`;
                 document.getElementById("guessInput").disabled = true;
@@ -194,7 +188,6 @@
             }
         }
 
-        // Initialize game display
         updateDisplay();
     </script>
 </body>
