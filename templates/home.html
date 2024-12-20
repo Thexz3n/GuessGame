@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Word Guess Game - Home</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
+    <link rel="stylesheet" href="/static/home.css">
 </head>
 
 <body>
@@ -25,7 +26,7 @@
                 <option value="Professions">Professions</option>
                 <option value="Sports">Sports</option>
             </select>
-            <br><br>
+            <br>
 
             <label for="difficulty">Choose Difficulty:</label>
             <select id="difficulty" name="difficulty">
@@ -34,7 +35,7 @@
                 <option value="Normal">Normal</option>
                 <option value="Difficult">Difficult</option>
             </select>
-            <br><br>
+            <br>
 
             <button type="submit">Start Game</button>
         </form>

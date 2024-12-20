@@ -18,7 +18,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background: var(--base-color);
+    background: linear-gradient(90deg, white, #c9d6ff);
     margin: 0;
     padding: 0;
     display: flex;
@@ -54,7 +54,7 @@ form select {
     padding: 10px;
     font-size: 14px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 8px;
     margin-bottom: 20px;
     background-color: #f9f9f9;
 }
@@ -94,7 +94,7 @@ form option {
 }
 
 form option:checked {
-    background-color: var(--accent-color);
+    background-color: #7494ec;
     color: var(--base-color);
 }
 
@@ -110,17 +110,16 @@ form option:focus {
 
 
 form button {
-    margin-top: 10px;
+    width: 100%;
+    height: 48px;
+    background: #7494ec;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, .1);
     border: none;
-    border-radius: 1000px;
-    padding: .85em 1em;
-    background-color: var(--accent-color);
-    color: var(--base-color);
-    font: inherit;
-    font-weight: 600;
-    text-transform: uppercase;
     cursor: pointer;
-    transition: 150ms ease;
+    font-size: 16px;
+    color: #fff;
+    font-weight: 600;
 }
 
 
