@@ -58,6 +58,7 @@ def home():
         return redirect(url_for('signup'))
 
 # --- Route for Game Page ---
+# filepath: /d:/ClassWork/data_structure/GuessGame/GuessGame/app.py
 @app.route('/game', methods=['POST'])
 def game():
     if 'loggedin' in session:
@@ -67,13 +68,13 @@ def game():
         cursor = mysql.connection.cursor(MySQLdb.cursors.DictCursor)
         
         if category == 'Random' and difficulty == 'Random':
-            cursor.execute('SELECT word, difficulty FROM word ORDER BY RAND() LIMIT 10')
+            cursor.execute('SELECT word, difficulty, hint FROM word ORDER BY RAND() LIMIT 100')
         elif category == 'Random':
-            cursor.execute('SELECT word, difficulty FROM word WHERE difficulty = %s ORDER BY RAND() LIMIT 10', (difficulty,))
+            cursor.execute('SELECT word, difficulty, hint FROM word WHERE difficulty = %s ORDER BY RAND() LIMIT 50', (difficulty,))
         elif difficulty == 'Random':
-            cursor.execute('SELECT word, difficulty FROM word WHERE category = %s ORDER BY RAND() LIMIT 10', (category,))
+            cursor.execute('SELECT word, difficulty, hint FROM word WHERE category = %s ORDER BY RAND() LIMIT 50', (category,))
         else:
-            cursor.execute('SELECT word, difficulty FROM word WHERE category = %s AND difficulty = %s ORDER BY RAND() LIMIT 10', 
+            cursor.execute('SELECT word, difficulty, hint FROM word WHERE category = %s AND difficulty = %s ORDER BY RAND() LIMIT 50', 
                            (category, difficulty))
         
         words = cursor.fetchall()
@@ -214,5 +215,6 @@ def next_word():
 
 # Run the Flask app
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True) # change 0.0.0.0 to your local ip address
+    app.run(port=5000, debug=True)
+    # app.run(host='0.0.0.0', port=5000, debug=True)
 

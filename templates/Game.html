@@ -1,3 +1,4 @@
+<!-- filepath: /d:/ClassWork/data_structure/GuessGame/GuessGame/templates/game.html -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,6 +17,8 @@
         <div class="word-display" id="wordDisplay">_ _ _ _ _ _ _ !</div>
         <p class="lives">Lives Left: <span id="lives">5</span></p>
         <div class="wrong-letters">Wrong Letters: <span id="wrongLetters"></span></div>
+        <button class="btn-hint" id="hintBtn" onclick="showHint()">Get Help</button>
+        <p id="hintMessage" class="hint"></p>
         <div class="guess-input">
             <input type="text" id="guessInput" maxlength="1" placeholder="Enter a letter">
             <br>
@@ -30,6 +33,7 @@
         let currentWord = wordQueue.shift(); // Dequeue the first word
         let wordToGuess = currentWord.word.toUpperCase();
         let wordDifficulty = currentWord.difficulty; // Difficulty of the word
+        let wordHint = currentWord.hint; // Hint for the word
         let guessedWord = Array.from(wordToGuess).map(char => /[A-Z]/.test(char) ? "_" : char);
         let lives = 5;
         let wrongLetters = [];
@@ -37,6 +41,25 @@
         let scoreArray = [];
         let guessedWords = [];
         let guessedLetters = new Set(); // Set for unique guesses
+        let hintShown = false; // Flag to track if hint has been shown
+
+        function revealLetters() {
+            let revealCount = 0;
+            if (wordDifficulty.toLowerCase() === 'easy') {
+                revealCount = Math.max(Math.floor(wordToGuess.length * 0.4), 2);
+            } else if (wordDifficulty.toLowerCase() === 'normal') {
+                revealCount = Math.max(Math.floor(wordToGuess.length * 0.2), 1);
+            }
+
+            let revealedIndices = new Set();
+            while (revealedIndices.size < revealCount) {
+                let randomIndex = Math.floor(Math.random() * wordToGuess.length);
+                if (!revealedIndices.has(randomIndex) && /[A-Z]/.test(wordToGuess[randomIndex])) {
+                    revealedIndices.add(randomIndex);
+                    guessedWord[randomIndex] = wordToGuess[randomIndex];
+                }
+            }
+        }
 
         function updateDisplay() {
             const wordDisplay = document.getElementById("wordDisplay");
@@ -104,18 +127,33 @@
             }
         }
 
+        function showHint() {
+            if (!hintShown) {
+                document.getElementById("hintMessage").textContent = `Hint: ${wordHint}`;
+                lives--;
+                hintShown = true; // Set the flag to true after showing the hint
+                updateDisplay();
+            } else {
+                document.getElementById("hintMessage").textContent = `Hint: ${wordHint}`;
+            }
+        }
+
         function nextWord() {
             if (wordQueue.length > 0) {
                 currentWord = wordQueue.shift(); // Dequeue the next word
                 wordToGuess = currentWord.word.toUpperCase();
                 wordDifficulty = currentWord.difficulty;
+                wordHint = currentWord.hint;
                 guessedWord = Array.from(wordToGuess).map(char => /[A-Z]/.test(char) ? "_" : char);
                 wrongLetters = [];
                 guessedLetters.clear(); // Clear the set for the next word
                 lives = 5; // Reset lives to 5
+                hintShown = false; // Reset the hint flag for the next word
                 document.getElementById("resultMessage").textContent = "";
+                document.getElementById("hintMessage").textContent = "";
                 document.getElementById("submitBtn").textContent = "Submit";
                 document.getElementById("submitBtn").onclick = makeGuess;
+                revealLetters(); // Reveal letters based on difficulty
                 updateDisplay();
             } else {
                 quitGame();
@@ -150,6 +188,7 @@
 
         document.getElementById("submitBtn").addEventListener("click", makeGuess);
 
+        revealLetters(); // Reveal letters based on difficulty
         updateDisplay();
     </script>
 </body>

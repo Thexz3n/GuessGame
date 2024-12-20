@@ -106,6 +106,21 @@ input[type="text"]:focus {
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
+.btn-hint {
+    padding: 10px 20px;
+    font-size: 16px;
+    color: rgb(85, 145, 200);
+    background: transparent;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.3s;
+}
+
+.btn-hint:hover {
+    color: rgba(85, 144, 200, 0.495);
+}
+
 .result {
     font-size: 18px;
     font-weight: bold;
