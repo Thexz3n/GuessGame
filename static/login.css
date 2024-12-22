@@ -7,7 +7,7 @@
 
 body {
     font-family: 'Arial', sans-serif;
-    background: linear-gradient(135deg, rgb(113, 73, 123), rgb(179, 217, 255), rgb(255, 240, 179));
+    background: rgba(255, 255, 255, 0.9);
     background-size: 400% 400%;
     animation: gradientBG 10s ease infinite;
     display: flex;
@@ -15,20 +15,6 @@ body {
     align-items: center;
     height: 100vh;
     color: #333;
-}
-
-@keyframes gradientBG {
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
 }
 
 .wrapper {
@@ -83,14 +69,17 @@ input[type="password"]:focus {
 }
 
 button {
-    padding: 10px 20px;
-    font-size: 16px;
-    color: white;
-    background: linear-gradient(90deg, rgb(255, 182, 193), rgb(240, 178, 255));
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: transform 0.2s, box-shadow 0.3s;
+        margin-top: 10px;
+        border: none;
+        border-radius: 1000px;
+        padding: .85em 1em;
+        background:  rgb(85, 145, 200);
+        color: white;
+        font: inherit;
+        font-weight: 600;
+        text-transform: uppercase;
+        cursor: pointer;
+        transition: 150ms ease;
 }
 
 button:hover {

@@ -6,11 +6,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Signup</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='signup.css') }}">
+  <link rel="stylesheet" href="/static/signup.css">
 </head>
 
 <body>
   <div class="wrapper">
     <h1>Signup</h1>
+
     {% with messages = get_flashed_messages() %}
     {% if messages %}
     <ul>
@@ -20,6 +22,7 @@
     </ul>
     {% endif %}
     {% endwith %}
+    
     <form action="{{ url_for('signup') }}" method="POST">
       <div>
         <label for="firstname-input">Firstname</label>
