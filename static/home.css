@@ -34,6 +34,9 @@ body {
     padding: 30px 40px;
     text-align: center;
     width: 350px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
 
 h1 {
@@ -114,7 +117,7 @@ form button {
     border: none;
     border-radius: 1000px;
     padding: .85em 1em;
-    background-color: var(--accent-color);
+    background: rgb(85, 145, 200);
     color: var(--base-color);
     font: inherit;
     font-weight: 600;
