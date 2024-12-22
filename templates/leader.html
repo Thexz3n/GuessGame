@@ -12,6 +12,7 @@
     <div class="button-container">
         <a href="{{ url_for('home') }}" class="btn">Home</a>
         <a href="{{ url_for('logout') }}" class="btn">Sign Out</a>
+        <a href="{{ url_for('documentation') }}" class="btn">Documentation</a>
     </div>
     <br><br>
     <div class="leaderboard-container">
@@ -53,6 +54,33 @@
                     <td>{{ player.player_name }}</td>
                     <td>{{ player.score }}</td>
                     <td>{{ player.guesses }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <br><br><br>
+
+    <div class="leaderboard-container">
+        <div class="leaderboard-header">Top 10 Recent Winners</div>
+        <table>
+            <thead>
+                <tr>
+                    <th>Rank</th>
+                    <th>Player Name</th>
+                    <th>Score</th>
+                    <th>Correctly Guessed Words</th>
+                    <th>Date</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for winner in recent_winners %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ winner.player_name }}</td>
+                    <td>{{ winner.score }}</td>
+                    <td>{{ winner.guesses }}</td>
+                    <td>{{ winner.date }}</td>
                 </tr>
                 {% endfor %}
             </tbody>

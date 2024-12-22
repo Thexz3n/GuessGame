@@ -53,3 +53,18 @@ p {
 strong {
     color: var(--accent-color);
 }
+
+.btn {
+    background: var(--accent-color);
+    color: var(--base-color);
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    border: none;
+    margin-top: 20px;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    justify-content: center;
+    justify-self: center;
+}

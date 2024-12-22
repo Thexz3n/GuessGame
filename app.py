@@ -133,6 +133,9 @@ def login():
             return redirect(url_for('login'))
     return render_template('login.html')
 
+@app.route('/documentation')
+def documentation():
+    return render_template('documentation.html')
 
 @app.route('/leader')
 def leader():
@@ -160,7 +163,17 @@ def leader():
         """, (user_id,))
         last_score = cursor.fetchone()
         
-        return render_template('leader.html', leaderboard=leaderboard, last_score=last_score, username=session['username'], enumerate=enumerate)
+        # Retrieve top 10 recent winners
+        cursor.execute("""
+            SELECT users.firstname AS player_name, score.score, score.guesses, score.created_at AS date
+            FROM users 
+            JOIN score ON users.id = score.user_id 
+            ORDER BY score.created_at DESC
+            LIMIT 10
+        """)
+        recent_winners = cursor.fetchall()
+        
+        return render_template('leader.html', leaderboard=leaderboard, last_score=last_score, recent_winners=recent_winners, username=session['username'])
     else:
         flash('Please log in to view the leaderboard.', 'error')
         return redirect(url_for('signup'))  
@@ -214,6 +227,6 @@ def next_word():
 
 # Run the Flask app
 if __name__ == '__main__':
-    # app.run(port=5000, debug=True)
-    app.run(host='192.168.43.133', port=5000, debug=True)
+    app.run(port=5000, debug=True)
+    # app.run(host='192.168.43.133', port=5000, debug=True)
 
