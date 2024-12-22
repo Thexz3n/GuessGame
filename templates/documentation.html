@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Project Documentation</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='documentation.css') }}">
+</head>
+
+<body>
+    <div class="wrapper">
+        <h1>Project Documentation</h1>
+        <h2>Data Structure Concepts Used</h2>
+
+        <h3>Login Page</h3>
+        <img src="../static/assets/login.png" alt="Login Page">
+        <p><strong>Hash Tables:</strong></p>
+        <ul>
+            <li><strong>Usage:</strong> Efficiently storing and retrieving user credentials in the login route.</li>
+            <li><strong>How:</strong> The users table in the MySQL database functions like a hash table, where the email
+                acts as the key and user details (like password) are the values.</li>
+            <li><strong>Benefit:</strong> Fast lookup for user credentials, allowing for quick login authentication.
+            </li>
+        </ul>
+        <p><strong>Lists or Arrays:</strong></p>
+        <ul>
+            <li><strong>Usage:</strong> Temporarily holding data, such as form inputs during login.</li>
+            <li><strong>How:</strong> User inputs (like email and password) are stored in variables (arrays or lists).
+            </li>
+            <li><strong>Benefit:</strong> Organizes and stores data for easy manipulation and retrieval.</li>
+        </ul>
+
+        <h3>Signup Page</h3>
+        <img src="../static/assets/signup.png" alt="Signup Page">
+        <p><strong>Hash Tables:</strong></p>
+        <ul>
+            <li><strong>Usage:</strong> Efficiently storing and retrieving user credentials in the signup route.</li>
+            <li><strong>How:</strong> The users table in the MySQL database functions like a hash table, where the email
+                acts as the key and user details (like password) are the values.</li>
+            <li><strong>Benefit:</strong> Fast lookup for user credentials, allowing for quick signup processing.</li>
+        </ul>
+        <p><strong>Lists or Arrays:</strong></p>
+        <ul>
+            <li><strong>Usage:</strong> Temporarily holding data, such as form inputs during signup.</li>
+            <li><strong>How:</strong> User inputs (like firstname, email, and password) are stored in variables (arrays
+                or lists).</li>
+            <li><strong>Benefit:</strong> Organizes and stores data for easy manipulation and retrieval.</li>
+        </ul>
+
+        <h3>Home Page</h3>
+        <img src="../static/assets/home.png" alt="Home Page">
+        <p><strong>HTML Forms (List-like structure):</strong></p>
+        <ul>
+            <li><strong>Usage:</strong> The form elements, particularly the dropdown menus (<b>select</b>), are used to
+                collect user choices for the game, such as category and difficulty level.</li>
+            <li><strong>How:</strong> The values of the dropdown options are presented in a list, and when the form is
+                submitted, the selected values are passed to the server in the form of category and difficulty
+                parameters.</li>
+            <li><strong>Benefit:</strong> Provides a way for the user to select options from a list of categories and
+                difficulties, which will guide the game behavior.</li>
+        </ul>
+        <p><strong>Session Variables (Dictionary-like structure):</strong></p>
+        <ul>
+            <li><strong>Usage:</strong> The username is passed from the session variable and dynamically inserted into
+                the page.</li>
+            <li><strong>How:</strong> The session variable stores the user's information (in this case, username) after
+                login, and this data is accessed to personalize the welcome message on the home page.</li>
+            <li><strong>Benefit:</strong> Allows persistent user-specific data (like the logged-in username) to be
+                easily accessed across different pages.</li>
+        </ul>
+        <p><strong>Database Tables:</strong></p>
+        <ul>
+            <li><strong>Usage:</strong> Though not directly visible in the HTML code, the game logic relies on data
+                stored in MySQL tables for categories (like kurdish-city, footballer, etc.) and difficulty levels (Easy,
+                Normal, Difficult).</li>
+            <li><strong>How:</strong> The game logic queries the database for words corresponding to the selected
+                category and difficulty. This information is fetched from the database tables (e.g., the word table).
+            </li>
+            <li><strong>Benefit:</strong> The structured data in the database provides efficient and dynamic content for
+                the game based on user preferences.</li>
+        </ul>
+
+        <h3>Game Page</h3>
+        <img src="../static/assets/game.png" alt="Game Page">
+        <p><strong>Queue (Array-like structure):</strong></p>
+        <ul>
+            <li><strong>Usage:</strong> The wordQueue array is used to manage the order of words for the game. The first
+                word is dequeued (shift()) and used as the word to guess.</li>
+            <li><strong>How:</strong> Each time a word is guessed correctly or the game progresses, the next word in the
+                queue is dequeued and used in the game.</li>
+            <li><strong>Benefit:</strong> Ensures words are presented in a sequential manner and can easily be rotated
+                with each new round of guessing.</li>
+        </ul>
+        <p><strong>Array (List-like structure):</strong></p>
+        <ul>
+            <li><strong>Usage:</strong> The guessedWord array stores the current state of the word being guessed, with
+                each letter either revealed or replaced by underscores (_).</li>
+            <li><strong>How:</strong> It is updated every time the user guesses a letter correctly, and is displayed to
+                the player as a series of underscores and letters.</li>
+            <li><strong>Benefit:</strong> Keeps track of the word's current state and updates the game view dynamically.
+            </li>
+        </ul>
+        <p><strong>Set (For unique guesses):</strong></p>
+        <ul>
+            <li><strong>Usage:</strong> The guessedLetters set tracks which letters have already been guessed to avoid
+                duplicates.</li>
+            <li><strong>How:</strong> When a new guess is made, it checks if the letter has been guessed before. If not,
+                it adds the letter to the set.</li>
+            <li><strong>Benefit:</strong> Ensures that the user can't guess the same letter more than once, improving
+                gameplay.</li>
+        </ul>
+        <p><strong>Array (For wrong guesses):</strong></p>
+        <ul>
+            <li><strong>Usage:</strong> The wrongLetters array stores the letters that were incorrectly guessed.</li>
+            <li><strong>How:</strong> Each time a guess is incorrect, the letter is added to the wrongLetters array and
+                displayed on the page.</li>
+            <li><strong>Benefit:</strong> Keeps track of incorrect guesses and helps the user remember which letters
+                they have already tried.</li>
+        </ul>
+        <p><strong>Object (For storing guessed words and scores):</strong></p>
+        <ul>
+            <li><strong>Usage:</strong> The guessedWords array stores objects representing the words that the player has
+                guessed correctly, along with the points awarded for each word.</li>
+            <li><strong>How:</strong> Each time a word is correctly guessed, an object containing the word and its
+                associated points is pushed to the guessedWords array.</li>
+            <li><strong>Benefit:</strong> Helps in tracking the words guessed, the associated points, and calculating
+                the player's final score.</li>
+        </ul>
+        <p><strong>Integer (For lives and scores):</strong></p>
+        <ul>
+            <li><strong>Usage:</strong> The lives variable tracks the remaining number of guesses the player has. The
+                totalScore variable stores the player's accumulated score.</li>
+            <li><strong>How:</strong> The lives count is decreased with each incorrect guess, and totalScore is updated
+                based on the difficulty level and points for each word guessed.</li>
+            <li><strong>Benefit:</strong> Manages the game's progress and determines when the player wins or loses.</li>
+        </ul>
+        <p><strong>Dictionary (for Word Data):</strong></p>
+        <ul>
+            <li><strong>Usage:</strong> The word data, such as wordToGuess, wordDifficulty, and wordHint, are fetched
+                from the server and stored in variables. Each word is associated with its difficulty, hint, and the word
+                itself.</li>
+            <li><strong>How:</strong> When the game starts, a word object is retrieved from the session's words array
+                and its attributes (word, difficulty, and hint) are used throughout the game.</li>
+            <li><strong>Benefit:</strong> Organizes related data about each word in a structured way, making it easier
+                to handle during the game.</li>
+        </ul>
+        <p><strong>Session (For storing user game data):</strong></p>
+        <ul>
+            <li><strong>Usage:</strong> The session is used to store the list of words (session['words']) fetched from
+                the database, allowing the game to access them between requests.</li>
+            <li><strong>How:</strong> On page load, the words are retrieved from the session and used to initialize the
+                game.</li>
+            <li><strong>Benefit:</strong> Persists user-specific data between requests, enabling a smooth gaming
+                experience even if the page reloads.</li>
+        </ul>
+        <p><strong>MySQL Database (For storing and retrieving scores):</strong></p>
+        <ul>
+            <li><strong>Usage:</strong> The game data, including user scores and guessed words, are stored in a MySQL
+                database.</li>
+            <li><strong>How:</strong> After the game ends, the final score is sent to the server and saved in the
+                database via the /save_score route.</li>
+            <li><strong>Benefit:</strong> Stores player scores and progress, allowing for leaderboards and persistent
+                tracking of users' game performance.</li>
+        </ul>
+
+        <h3>Leaderboard Page</h3>
+        <img src="../static/assets/leader.png" alt="Leaderboard Page">
+        <p><strong>Leaderboard Data:</strong></p>
+        <ul>
+            <li><strong>List of Dictionaries (Leaderboard):</strong> The top 10 leaderboard entries are fetched from the
+                database as a list of dictionaries, each representing a player's score and guesses.</li>
+            <li><strong>How:</strong> This list is then passed to the HTML template for rendering. Each dictionary
+                contains details such as player_name, score, and guesses.</li>
+        </ul>
+        <p><strong>User's Last Score:</strong></p>
+        <ul>
+            <li><strong>Dictionary (User's Score):</strong> The current user's last score and guesses are fetched as a
+                dictionary.</li>
+            <li><strong>How:</strong> This dictionary is then used to display the user's most recent game score and the
+                number of words they guessed correctly.</li>
+        </ul>
+        <p><strong>Rendering Data with Loops (HTML Template):</strong></p>
+        <ul>
+            <li><strong>Looping through the leaderboard:</strong> In the HTML template, a loop ({% for player in
+                leaderboard %}) iterates over the leaderboard list, displaying each player's name, score, and correctly
+                guessed words. The use of loop.index in the template adds a ranking to each player, showing the top
+                players first.</li>
+            <li><strong>Highlighting the Top Player:</strong> The highlight class is applied to the top-ranked player
+                (the first player in the list) using the loop index.</li>
+        </ul>
+        <p><strong>MySQL Database as Data Storage:</strong></p>
+        <ul>
+            <li><strong>Usage:</strong> The leaderboard and user score information are stored in a relational database
+                using the score table, and user information is retrieved from the users table. SQL queries like JOIN and
+                ORDER BY are used to fetch the top players and the current user's last game score.</li>
+        </ul>
+        <p><strong>Data Flow:</strong></p>
+        <ul>
+            <li><strong>Usage:</strong> The server (Flask) queries the database and returns the results as Python data
+                structures (lists and dictionaries).</li>
+            <li><strong>How:</strong> These data structures are passed to the HTML template and rendered using Jinja2
+                templating engine syntax.</li>
+        </ul>
+        <p><strong>Data Structures Breakdown:</strong></p>
+        <ul>
+            <li><strong>List of Dictionaries:</strong></li>
+            <ul>
+                <li><strong>leaderboard:</strong> A list where each element is a dictionary containing a player's name,
+                    score, and the number of correctly guessed words.</li>
+            </ul>
+            <li><strong>Dictionary:</strong></li>
+            <ul>
+                <li><strong>last_score:</strong> A dictionary containing the user's score and the number of correctly
+                    guessed words.</li>
+            </ul>
+        </ul>
+
+        <h3>Database Tables</h3>
+        <p><strong>Usage:</strong> Structured storage for persistent data such as user details and game scores.</p>
+        <p><strong>How:</strong> Tables like users (for user info) and score (for storing game scores) are used. The
+            primary key (email for users) maps to user details.</p>
+        <p><strong>Benefit:</strong> Provides secure, long-term storage for user and game data, ensuring structured
+            access.</p>
+    </div>
+</body>
+
+</html>

@@ -1,7 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from flask_mysqldb import MySQL
 import MySQLdb.cursors
-import re
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__, static_url_path='/static')
@@ -215,6 +214,6 @@ def next_word():
 
 # Run the Flask app
 if __name__ == '__main__':
-    app.run(port=5000, debug=True)
-    # app.run(host='0.0.0.0', port=5000, debug=True)
+    # app.run(port=5000, debug=True)
+    app.run(host='192.168.43.133', port=5000, debug=True)
 

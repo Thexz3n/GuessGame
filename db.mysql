@@ -28,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `gamedb`.`users` (
   PRIMARY KEY (`id`),
   UNIQUE INDEX `email` (`email` ASC) VISIBLE)
 ENGINE = InnoDB
-AUTO_INCREMENT = 2
+AUTO_INCREMENT = 15
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -40,12 +40,15 @@ CREATE TABLE IF NOT EXISTS `gamedb`.`score` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `user_id` INT NOT NULL,
   `score` INT NOT NULL,
+  `created_at` TIMESTAMP NULL DEFAULT CURRENT_TIMESTAMP,
+  `guesses` INT NULL DEFAULT NULL,
   PRIMARY KEY (`id`),
   INDEX `user_id` (`user_id` ASC) VISIBLE,
   CONSTRAINT `score_ibfk_1`
     FOREIGN KEY (`user_id`)
     REFERENCES `gamedb`.`users` (`id`))
 ENGINE = InnoDB
+AUTO_INCREMENT = 66
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
@@ -58,9 +61,10 @@ CREATE TABLE IF NOT EXISTS `gamedb`.`word` (
   `category` VARCHAR(50) NOT NULL,
   `difficulty` VARCHAR(50) NOT NULL,
   `word` VARCHAR(100) NOT NULL,
+  `hint` VARCHAR(255) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 51
+AUTO_INCREMENT = 994
 DEFAULT CHARACTER SET = utf8mb4
 COLLATE = utf8mb4_0900_ai_ci;
 
